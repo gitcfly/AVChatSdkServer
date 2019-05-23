@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
 
 public class ChatSdkServer extends Thread{
     public static HashMap<String,RemoteUser> userMap=new HashMap<>();
-    public static ExecutorService forwardPool= Executors.newFixedThreadPool(10);
+    public static ExecutorService handlerPool= Executors.newFixedThreadPool(10);
     int bufLength;
     int port;
     DatagramSocket serverSockt;
@@ -35,8 +35,8 @@ public class ChatSdkServer extends Thread{
                 byte[] buffer=new byte[bufLength];
                 DatagramPacket recivedPacket=new DatagramPacket(buffer,bufLength);
                 serverSockt.receive(recivedPacket);
-                ForwardTask task=new ForwardTask(serverSockt,recivedPacket);
-                forwardPool.execute(task);
+                HandleRequestTask task=new HandleRequestTask(serverSockt,recivedPacket);
+                handlerPool.execute(task);
             }catch (SocketException e){
                 serverSockt.close();
                 e.printStackTrace();

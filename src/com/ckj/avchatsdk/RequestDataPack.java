@@ -1,8 +1,11 @@
 package com.ckj.avchatsdk;
 
 import java.util.List;
+import java.util.Map;
 
 public class RequestDataPack {
+
+	public String reqid;
 
 	public List<String> targetIds;
 
@@ -10,7 +13,9 @@ public class RequestDataPack {
 
 	public byte[] data;
 
-	public String type="av";//audio,video,av,connect,disconnect
+	public CodeType type;
+
+	public Object extra;
 	
 	public RequestDataPack(){
 	}
@@ -45,12 +50,27 @@ public class RequestDataPack {
 		this.data = data;
 	}
 
-
-	public String getType() {
+	public CodeType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(CodeType type) {
 		this.type = type;
+	}
+
+	public Object getExtra() {
+		return extra;
+	}
+
+	public void setExtra(Object extra) {
+		this.extra = extra;
+	}
+	
+	public String getReqid() {
+		return reqid;
+	}
+
+	public void setReqid(String reqid) {
+		this.reqid = reqid;
 	}
 }
